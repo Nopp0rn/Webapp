@@ -1,11 +1,110 @@
 <!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <base target="_top">
 
-<html>
-   <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-      <base target="_top">
-   </head>
-   <body>
-      <iframe style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;border: 0;" src="https://script.google.com/macros/s/AKfycbwSto69fMTn1Fnn2wxittmuiOUwhbfVEU6XlA3ERwPFcPDCG-BwTUTKOgh3eTYqF9Xjnw/exec"></iframe>
-   </body>
+  <!-- ── PWA / Home Screen ── -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Noppone">
+  <meta name="application-name" content="Noppone">
+  <meta name="theme-color" content="#080f1e">
+  <meta name="msapplication-TileColor" content="#080f1e">
+
+  <!-- ── SEO / Share ── -->
+  <title>Performance Area Noppone</title>
+  <meta name="description" content="District Sales Dashboard — Cockpit Performance Area Noppone">
+
+  <!-- ── Icons (วางไฟล์ไว้ใน root ของ repo) ── -->
+  <!-- iOS -->
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/cockpit_ios_180.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="icons/cockpit_ios_120.png">
+  <link rel="apple-touch-icon" sizes="87x87"   href="icons/cockpit_ios_87.png">
+  <link rel="apple-touch-icon" sizes="60x60"   href="icons/cockpit_ios_60.png">
+  <!-- Android / General -->
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/cockpit_android_192.png">
+  <link rel="icon" type="image/png" sizes="96x96"   href="icons/cockpit_android_96.png">
+  <link rel="icon" type="image/png" sizes="32x32"   href="icons/cockpit_android_96.png">
+  <!-- Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%; height: 100%;
+      background: #080f1e;
+      overflow: hidden;
+    }
+    iframe {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    /* Splash fallback while iframe loads */
+    #splash {
+      position: fixed; inset: 0;
+      background: #080f1e;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 16px; z-index: 10;
+      transition: opacity .4s;
+    }
+    #splash.hidden { opacity: 0; pointer-events: none; }
+    #splash-logo {
+      width: 72px; height: 72px;
+      background: #FFE000;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+    }
+    #splash h1 {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 18px; font-weight: 700;
+      color: #f0f8ff; letter-spacing: .5px;
+    }
+    #splash p {
+      font-family: monospace;
+      font-size: 12px; color: #3a5a84;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .spinner {
+      width: 28px; height: 28px;
+      border: 3px solid #1e2d4a;
+      border-top-color: #00d4ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- Splash screen -->
+  <div id="splash">
+    <div id="splash-logo">🏁</div>
+    <h1>Performance Area Noppone</h1>
+    <p>District Dashboard · May 2026</p>
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Main iframe -->
+  <iframe
+    id="app"
+    src="https://script.google.com/macros/s/AKfycbyC_DIEw_nf1y-mBj30yJbUe96CIDOy0mokVtuPT00NPHYOFSNBbasNilPZKpOYaJxzFQ/exec"
+    allow="clipboard-read; clipboard-write"
+    onload="document.getElementById('splash').classList.add('hidden')"
+  ></iframe>
+
+  <script>
+    // ซ่อน splash หลัง 6 วินาที กรณี onload ไม่ trigger
+    setTimeout(function() {
+      document.getElementById('splash').classList.add('hidden');
+    }, 6000);
+  </script>
+
+</body>
 </html>
